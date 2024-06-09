@@ -1,0 +1,56 @@
+#!/bin/bash
+
+
+if [[ "${#}" -lt 2 ]] ; then
+echo "Wrong arg count!"
+exit 1
+fi
+
+#Is this the right way of checking script arguments with a random order???
+
+for argument in ${@} ; do
+        if [[ -f "${argument}" ]] ; then
+                if [[ ! -e "${argument}" ]] ; then
+                        echo "Such a file does not exist!"
+                        exit 1
+                fi
+                if [[ "${argument}" ==  "^\<-.*\>$" ]] ; then
+                        echo "Invalid file name!"
+                        exit 1
+                fi
+        else
+                if [[ "${argument}" == "^-R[\w]=[\w]$" ]] ; then
+                        echo "Invalid pattern!"
+                        exit 1
+                fi
+        fi
+done
+
+TEMP_FILE=$(mktemp)  #Just a file for storing the words that need to be replaced, indexed by specific keys, so that they cannot be substituted multiple times (task's requirement)
+
+for file in ${@}; do
+    if [[ -f "${file}" ]] ; then
+                for pattern in ${@} ; do
+                if [ ! -f "${pattern}" ] ; then
+                                oldWord=$(echo  "${pattern}"| cut -d '=' -f 1 | sed -E 's/^..//')
+                            newWord=$(echo "${pattern}" | cut -d '=' -f 2)      
+                toReplace="$(pwgen)${oldWord}"
+
+                                sed -E -i "s/\b${oldWord}\b/${toReplace}/g" "${file}"
+                    printf "${toReplace}-${newWord}\n" >> "${TEMP_FILE}"
+            fi
+        done
+    fi
+done
+
+for file in ${@}; do
+        if [[ -f "${file}" ]] ; then
+            while read line; do
+                    toReplace=$(echo "${line}" | cut -d '-' -f 1)
+                    newWord=$(echo "${line}" | cut -d '-' -f 2)
+                    sed -E -i "s/\b${toReplace}\b/${newWord}/g" "${file}"
+            done < "${TEMP_FILE}"
+        fi
+done
+
+rm -f "${TEMP_FILE}"
