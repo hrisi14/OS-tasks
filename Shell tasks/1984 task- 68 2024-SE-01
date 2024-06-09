@@ -1,12 +1,10 @@
 #!/bin/bash
 
-
 if [[ "${#}" -lt 2 ]] ; then
 echo "Wrong arg count!"
 exit 1
 fi
 
-#Is this the right way of checking script arguments with a random order???
 
 for argument in ${@} ; do
         if [[ -f "${argument}" ]] ; then
