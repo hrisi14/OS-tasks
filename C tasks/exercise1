@@ -1,0 +1,45 @@
+#include <stdint.h>
+#include <err.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+
+int main(void)
+{
+
+   int fd1 = open("/home/students/s0600138/Ctasks/passwd", O_RDONLY);
+
+   if(fd1<0)
+   {
+      err(1, "Could not open file %s", "/home/students/s0600138/Ctasks/passwd");
+   }
+
+   int fd2 = open("/home/students/s0600138/Ctasks/tail.txt", O_WRONLY|O_TRUNC);
+   if (fd2<0)
+   {
+           err(1, "Could not open file %s", "home/students/s060038/Ctasks/tail.txt");
+   }
+
+   char symbol;
+   int res = 0;
+
+   while ((res = read(fd1, &symbol,1))>0)
+   {
+         int writeStatus = write(fd2, &symbol, 1);
+     if (writeStatus<0)
+         {
+                 err(1, "Error occurred while writing in the second file!");
+         }
+   }
+
+   if (res==-1)
+   {
+           err(2, "Error while reading!");
+   }
+
+    close(fd1);
+    close(fd2);
+    exit(0);
+}
+
