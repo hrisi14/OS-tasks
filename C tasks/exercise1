@@ -8,17 +8,17 @@
 int main(void)
 {
 
-   int fd1 = open("/home/students/s0600138/Ctasks/passwd", O_RDONLY);
+   int fd1 = open("/home/students/Ctasks/passwd", O_RDONLY);
 
    if(fd1<0)
    {
-      err(1, "Could not open file %s", "/home/students/s0600138/Ctasks/passwd");
+      err(1, "Could not open file %s", "/home/students/Ctasks/passwd");
    }
 
    int fd2 = open("/home/students/s0600138/Ctasks/tail.txt", O_WRONLY|O_TRUNC);
    if (fd2<0)
    {
-           err(1, "Could not open file %s", "home/students/s060038/Ctasks/tail.txt");
+           err(1, "Could not open file %s", "home/students/Ctasks/tail.txt");
    }
 
    char symbol;
