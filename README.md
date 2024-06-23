@@ -1,1 +1,1 @@
-Тази папка съдържа мои решения на някои от характерните за курса по Операционни системи (ФМИ, СУ) задачи, давани на изпити. Прикачени са и условията на задачите с цел улеснение на читателя.
+This repository consists of my solutions to some of the typical problems given in exams in the Operating systems' course (FMI, SU). Tasks' conditions have also been attached (for reader's convenience).
