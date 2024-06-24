@@ -8,7 +8,7 @@ fi
 TMP_USERS=$(mktemp)
 
 while read current_user; do
-        user_dir="~${user}"   #Check whether correct!
+        user_dir="~${user}"   #?!
 
         if [[ ! -e "${user_dir}" ]] ; then
                 echo "${user}" >> "${TMP_USERS}"
@@ -21,7 +21,7 @@ while read current_user; do
         if [[ ! "$(stat -c '%a' "${user_dir}")"&2 ]] ; then
                 echo "${user}" >> "${TMP_USERS}"
         fi
-done < <(ps aux | grep -E -v "^root.*" | cut -d ' ' -f 1 | uniq)  #Do I need parenthesis here?
+done < <(ps aux | grep -E -v "^root.*" | cut -d ' ' -f 1 | uniq)  
 
 
 root_total_rss="$(ps -u "root" -o rss= | awk '{sum += $1} END {print sum}')"
