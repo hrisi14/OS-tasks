@@ -23,27 +23,22 @@ while read FILE ; do
 
     while read CURRENT; do
 
-        #echo "$(grep ${CURRENT} ${TEMPFILE} )"
-                if [[ -z "$(grep   ${CURRENT}  ${TEMPFILE} )" ]] ; then
+       if [[ -z "$(grep   ${CURRENT}  ${TEMPFILE} )" ]] ; then
                     firstHash="$(sha256sum ${FILE} | awk '{print $1}' )"
                     secondHash="$(sha256sum ${CURRENT} | awk '{print $1}' )"
-
-            #echo "${firstHash}"
-            #echo "${secondHash}"
-
+ 
             if [[ "${firstHash}" == "${secondHash}" ]]; then
                 currentFileSize="$(stat ${CURRENT} -c '%s')"
                 memorySize="$((memorySize + ${currentFileSize}))"
 
-        #Is this the correct way of solving this problem??!
-
+    
                 unlink "${CURRENT}"
                 ln "${FILE}"  "${CURRENT}"  #Make the files point to the same data copy
                 groupsFlag=1
                 echo "${CURRENT}" >> "${TEMPFILE}"
 
            fi
-           fi
+        fi
 
 #unifies hardlinks; deletes one of the files; increments ramCounter; increments deletedFilesCounter
 
