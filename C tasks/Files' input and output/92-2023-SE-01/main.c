@@ -113,7 +113,7 @@ int main(int argc, char* argv[])
 		   	 saveMessage(f1, f2, currentPos);
 		   }
 	       
-	       //Returning back to initial position:
+	       //Returning back to the initial position:
 	       if (lseek(f1, currentPos, SEEK_SET)<0) 
 		   {
 		   	   err(1, "Could not lseek to initial position!");
