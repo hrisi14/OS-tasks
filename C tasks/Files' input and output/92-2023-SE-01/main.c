@@ -114,7 +114,7 @@ int main(int argc, char* argv[])
 		   }
 	       
 	       //Returning back to initial position:
-	       if (lseek(f1, currentPos, SEEK_SET)<0) //Do I need multiplication to sizeof(char) here?
+	       if (lseek(f1, currentPos, SEEK_SET)<0) 
 		   {
 		   	   err(1, "Could not lseek to initial position!");
 		   }
