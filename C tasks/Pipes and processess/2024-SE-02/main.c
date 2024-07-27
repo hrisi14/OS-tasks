@@ -52,7 +52,7 @@ void saveRandomData(int resFd, const int8_t* bytes, uint16_t S)
 
 void execProgram(const char* program, int fromParent)
 {
-   int res = execl(program, program, NULL);  
+   int res = execlp(program, program, (char*)NULL);  
    if (res<0)
    {
            err(1, "Could not exec!");
