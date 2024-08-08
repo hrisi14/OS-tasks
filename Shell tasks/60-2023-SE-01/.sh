@@ -11,16 +11,15 @@ fi
 #       exit 1
 #fi
 
-if [[ ! -d "${2}" ]] ; then
-        echo "Second arg must be a directory!"
-        exit 1
-fi
-
 if [[ ! -e "${2}" ]] ; then
         echo "There is no such directory!"
         exit 1
 fi
 
+if [[ ! -d "${2}" ]] ; then
+        echo "Second arg must be a directory!"
+        exit 1
+fi
 
 while read word ; do
         while read file ; do
