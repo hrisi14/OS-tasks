@@ -27,7 +27,7 @@ fi
 
 TMP_OBJECTS="$(mktemp)"
 index=0
-#remove all broken symlinks from the initial directory
+#remove all the broken symlinks from the initial directory
 
 while read file ; do
         if [[ -L "${file}" ]] ; then
