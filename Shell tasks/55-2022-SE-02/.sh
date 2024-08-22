@@ -39,7 +39,7 @@ while read file ; do
         fi
 done < <(find "${1}" -type f)
 
-cat "${TMP_OBJECTS}" | cut -d '-' -f 1,2 | sort | uniq  #extracting all unique valid objects
+cat "${TMP_OBJECTS}" | cut -d '-' -f 1,2 | sort | uniq > "${TMP_OBJECTS}"  #extracting all unique valid objects
 
 TO_REMAIN="$(mktemp)"
 
