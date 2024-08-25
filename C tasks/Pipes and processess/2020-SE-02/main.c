@@ -23,6 +23,11 @@ int main(int argc, char* argv[])
         {
                 err(1, "Could not open input file!");
         }
+
+          if (resFd<0)
+        {
+                err(1, "Could not create output file!");
+        }
         int pFd[2];
     if (pipe(pFd)<0)
         {
